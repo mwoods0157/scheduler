@@ -4,15 +4,12 @@
   "private": true,
   "proxy": "http://localhost:8001",
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^0.25.0",
     "classnames": "^2.2.6",
     "normalize.css": "^8.0.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-hooks-testing-library": "^0.6.0",
-    "react-scripts": "3.0.0",
-    "react-test-render": "^1.1.2",
-    "react-test-renderer": "^16.13.1"
+    "react-scripts": "3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -20,8 +17,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public --ci",
-    "build-storybook": "build-storybook -s public",
-    "cypress": "cypress open -P ."
+    "build-storybook": "build-storybook -s public"
   },
   "browserslist": {
     "production": [
@@ -45,17 +41,12 @@
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^8.0.7",
     "babel-loader": "^8.0.5",
-    "node-sass": "^4.11.0",
-    "prop-types": "^15.7.2"
+    "node-sass": "^4.14.0"
   },
   "jest": {
     "watchPathIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/.git/"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.js",
-      "!src/index.js"
     ]
   }
 }
