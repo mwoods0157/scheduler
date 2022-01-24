@@ -3,52 +3,77 @@ import "components/Appointment/styles.scss";
 import Header from './Header';
 import Show from './Show';
 import Empty from './Empty';
+import useVisualMode from 'hooks/useVisualMode';
+import Form from './Form';
+import axios from 'axios';
 
-const appointments = [
-    {
-      id: 1,
-      time: "12pm",
-    },
-    {
-      id: 2,
-      time: "1pm",
-      interview: {
-        student: "Lydia Miller-Jones",
-        interviewer:{
-          id: 3,
-          name: "Sylvia Palmer",
-          avatar: "https://i.imgur.com/LpaY82x.png",
-        }
-      }
-    },
-    {
-      id: 3,
-      time: "2pm",
-    },
-    {
-      id: 4,
-      time: "3pm",
-      interview: {
-        student: "Archie Andrews",
-        interviewer:{
-          id: 4,
-          name: "Cohana Roy",
-          avatar: "https://i.imgur.com/FK8V841.jpg",
-        }
-      }
-    },
-    {
-      id: 5,
-      time: "4pm",
-    }
-  ];
+const EMPTY = "EMPTY";
+const SHOW = "SHOW";
+
 
 
 export default function Appointment(props) {
+  const EMPTY = "EMPTY";
+  const SHOW = "SHOW";
+  const CREATE = "CREATE";
+  const { mode, transition, back } = useVisualMode(
+    props.interview ? SHOW : EMPTY
+  );
+
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: {...interview}
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    setState({
+      ...state,
+      appointments
+    });
+
+    axios.put(`/api/appointments/${id}`, {interview})
+    .then((res) => {setState(state), transition(SHOW)}
+    )}
+
+  const save = (name, interviewer) => {
+    transition(SAVING);
+    const interview = {
+      student: name,
+      interviewer
+    };
+
+    bookInterview(props.id, interview);
+  }
+
+  const deleting = () => {
+    transition(DELETE, true);
+    props.cancelInterview(props.id)
+  }
+
+
+
     return (
         <article className="appointment">
             <Header time={props.time}/>
-            {props.interview ? <Show student={props.student} interviewer={props.interviewer}/> : <Empty />}
+            {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} bookInterview={props.bookInterview}/>}
+            {mode === CREATE && <Form onSave={save} onCancel={back} interviewers={props.interviewers} bookInterview={props.bookInterview}/>}
+            {mode === SHOW && (
+              <Show
+              student={props.interview.student}
+              interviewer={props.interview.interviewer}
+              bookInterview={props.bookInterview}
+              />
+            
+            )}
+            {mode === SAVING && <Status message="Saving"/>}
+            {mode === DELETE && <Status message="Deleting"/>}
         </article>
     );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import DayListItem from './DayListItem';
 
 export default function DayList({days, value, onChange}) {
+    //console.log(days);
     return (
         <ul>
             {days.map((day) => (
@@ -9,7 +10,7 @@ export default function DayList({days, value, onChange}) {
                 name={day.name} 
                 spots={day.spots}
                 selected={day.name === value}
-                setDay={day.onChange}/>
+                setDay={onChange}/>
             ))}
         </ul>
     );
