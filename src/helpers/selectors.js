@@ -18,28 +18,34 @@ export default function getAppointmentsForDay(state, day) {
 }
 
 export function getInterview(state, interview) {
-    if(!interview.interviewer) {
+    let interviewersObj = state.interviewers;
+    let results = {};
+    
+    if(!interview || !interviewersObj) {
         return null;
-    } else {
-        for (const i in state.interviewers) {
-            if (i == interview.interviewer.id) {
-                return interview;
+    } 
+        
+    for (const key of Object.keys(interviewersObj) ) {
+            let interviewer = interviewersObj[key];
+            
+            if (interviewer.id === interview.interviewer) {
+                results['interviewer'] = interviewer;
+                results['student'] = interview.student;
             }
         }
-    }
+    //console.log(results);
+    return results;
 }
 
 export function getInterviewersForDay(state, day) {
     const result = [];
     const days = state.days;
-    if (state.days.length < 1) {
-        return result;
-    }
     let interviewersForDay;
-
-    for (const day of days) {
-        if (day.name === day) {
-            interviewersForDay = day.interviewers;
+    
+    for (const d of days) {
+        if (d.name === day) {
+            interviewersForDay = d.interviewers;
+            
             if (!interviewersForDay) {
                 return result;
             }
@@ -49,7 +55,7 @@ export function getInterviewersForDay(state, day) {
     for (const id of interviewersForDay) {
         result.push(state.interviewers[id]);
     }
-
+    console.log("result", result)
     return result;
 }
 

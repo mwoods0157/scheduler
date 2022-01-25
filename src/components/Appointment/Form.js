@@ -13,13 +13,21 @@ export default function Form(props) {
     const cancel = () => {
         setInterviewer(null);
         setStudent('');
-        {props.onCancel(() => back())}
+        props.onCancel();
     }
+
+    function validate () {
+        if (student === "") {
+            return;
+        }
+        props.onSave(student, interviewer);
+    }
+
 
     return (
         <main className="appointment__card appointment__card--create">
             <section className="appointment__card-left">
-                <form autoComplete="off" onSubmit={event => event.preventDefault()}>
+                <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
                 <input
                 className="appointment__create-input text--semi-bold"
                 name="name"
@@ -30,7 +38,7 @@ export default function Form(props) {
                 />
                 </form>
                 <InterviewerList 
-                value={props.interviewer}
+                value={interviewer}
                 interviewers={props.interviewers}
                 onChange={setInterviewer}
                 />
@@ -38,7 +46,7 @@ export default function Form(props) {
             <section className="appointment__card-right">
                 <section className="appointment__actions">
                     <Button danger onClick={cancel}>Cancel</Button>
-                    <Button confirm onClick={props.onSave(() => transition(SAVING))}>Save</Button>
+                    <Button confirm onClick={validate}>Save</Button>
                 </section>
             </section>
         </main>
