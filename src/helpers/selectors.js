@@ -33,7 +33,7 @@ export function getInterview(state, interview) {
                 results['student'] = interview.student;
             }
         }
-    //console.log(results);
+    //console.log("getInterview", results);
     return results;
 }
 
@@ -55,7 +55,7 @@ export function getInterviewersForDay(state, day) {
     for (const id of interviewersForDay) {
         result.push(state.interviewers[id]);
     }
-    console.log("result", result)
+    //console.log("result", result)
     return result;
 }
 
