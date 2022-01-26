@@ -54,7 +54,7 @@ export default function Appointment(props) {
   // const edit = () => {
   //   transition(EDIT);
   // }
-
+  console.log("props index", props);
 
 
     return (
