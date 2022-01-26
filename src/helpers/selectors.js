@@ -40,7 +40,7 @@ export function getInterview(state, interview) {
 export function getInterviewersForDay(state, day) {
     const result = [];
     const days = state.days;
-    let interviewersForDay;
+    let interviewersForDay = [];
     
     for (const d of days) {
         if (d.name === day) {

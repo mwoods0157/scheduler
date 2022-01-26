@@ -18,6 +18,9 @@ export default function Appointment(props) {
   const DELETING = "DELETING";
   const CONFIRM = "CONFIRM";
   const EDIT = "EDIT";
+  const ERROR_SAVE = "ERROR_SAVE";
+  const ERROR_DELETE = "ERROR_DELETE";
+
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -34,7 +37,7 @@ export default function Appointment(props) {
       .then(() => {
         transition(SHOW);
       })
-      
+      .catch(() => transition(ERROR_SAVE, true));
   };
 
   const deleting = () => {
@@ -44,17 +47,17 @@ export default function Appointment(props) {
       .then(() => {
         transition(EMPTY);
       })
-      
+      .catch(() => transition(ERROR_DELETE, true));
   };
 
-  //const confirmation = () => {
-  //  transition(CONFIRM);
-  //}
+  const confirmation = () => {
+    transition(CONFIRM);
+  }
 
-  // const edit = () => {
-  //   transition(EDIT);
-  // }
-  console.log("props index", props);
+   const edit = () => {
+     transition(EDIT);
+   }
+  //console.log("props index", props);
 
 
     return (
@@ -66,6 +69,8 @@ export default function Appointment(props) {
               <Show
               student={props.interview.student}
               interviewer={props.interview.interviewer}
+              onDelete={() => confirmation()}
+              onEdit={() => edit()}
               />
             
             )}
@@ -79,7 +84,7 @@ export default function Appointment(props) {
               />)}
             {mode === EDIT && (
               <Form 
-              name={props.interview.student}
+              student={props.interview.student}
               interviewer={props.interview.interviewer.id}
               interviewers={props.interviewers}
               onSave={save}
@@ -89,5 +94,3 @@ export default function Appointment(props) {
     );
 }
 
-//<h1>{props.time ? `${props.time}` : "No appointments"}</h1>
-//<Header time={props.time} />
