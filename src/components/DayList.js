@@ -10,7 +10,9 @@ export default function DayList({days, value, onChange}) {
                 name={day.name} 
                 spots={day.spots}
                 selected={day.name === value}
-                setDay={onChange}/>
+                setDay={onChange}
+                {...day}
+                />
             ))}
         </ul>
     );
