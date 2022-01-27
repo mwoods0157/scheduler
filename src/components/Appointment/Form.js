@@ -9,6 +9,7 @@ import "components/Appointment/styles.scss";
 export default function Form(props) {
     const [student, setStudent] = useState(props.student || "");
     const [interviewer, setInterviewer] = useState(props.interviewer || null);
+    const [error, setError] = useState("");
 
     const cancel = () => {
         setInterviewer(null);
@@ -18,6 +19,7 @@ export default function Form(props) {
 
     function validate () {
         if (student === "") {
+            setError("Student name cannot be blank");
             return;
         }
         props.onSave(student, interviewer);
@@ -35,7 +37,9 @@ export default function Form(props) {
                 placeholder="Enter Student Name"
                 value={student}
                 onChange={(e) => setStudent(e.target.value)}
+                data-testid="student-name-input"
                 />
+                <section className="appointment__validation">{error}</section>
                 </form>
                 <InterviewerList 
                 value={interviewer}
