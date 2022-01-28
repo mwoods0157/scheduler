@@ -1,5 +1,4 @@
 export default function getAppointmentsForDay(state, day) {
-    //... returns an array of appointments for that day
     const array = [];
     for (const d of state.days) {
         if (d.name === day) {
@@ -33,7 +32,6 @@ export function getInterview(state, interview) {
                 results['student'] = interview.student;
             }
         }
-    //console.log("getInterview", results);
     return results;
 }
 
@@ -55,7 +53,6 @@ export function getInterviewersForDay(state, day) {
     for (const id of interviewersForDay) {
         result.push(state.interviewers[id]);
     }
-    //console.log("result", result)
     return result;
 }
 
