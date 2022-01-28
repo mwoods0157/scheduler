@@ -30,12 +30,12 @@ Scheduler is an React appliaction that allows uses to book appointments with int
 
 ### Creating an interview
 
-https://github.com/mwoods0157/scheduler/blob/master/docs/creating-appointment.png
+!["Creating an interview"](https://github.com/mwoods0157/scheduler/blob/master/docs/creating-appointment.png)
 
 
 ### An empty inteterview space
 
-https://github.com/mwoods0157/scheduler/blob/master/docs/empty-appointment.png
+!["An empty interview space"](https://github.com/mwoods0157/scheduler/blob/master/docs/empty-appointment.png)
 
 
 
