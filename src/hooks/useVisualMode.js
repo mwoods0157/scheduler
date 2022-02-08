@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
  const useVisualMode = (initialMode) => {
     const [history, setHistory] = useState([initialMode]);
