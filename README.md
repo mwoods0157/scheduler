@@ -34,6 +34,15 @@ npm run storybook
 
 Scheduler is an React appliaction that allows uses to book appointments with interviewers over a given week. It allows them to create, edit, and delete interviews.
 
+## Dependencies
+-axios
+-classnames
+-normalize.css
+-eslint
+-react
+-react-dom
+-react-scripts
+
 ## Pictures
 
 ### Creating an interview
