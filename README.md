@@ -4,10 +4,18 @@
 
 Install dependencies with `npm install`.
 
+## Ensure you are using nvm and node 12.22.7
+
 ## Running Webpack Development Server
 
 ```sh
 npm start
+```
+
+## Running the Scheduler API Server
+```sh
+npm start
+http://localhost:8001/api/debug/reset
 ```
 
 ## Running Jest Test Framework
